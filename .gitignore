@@ -1,0 +1,20 @@
+# Flutter
+flutter/build/
+flutter/.dart_tool/
+flutter/.idea/
+flutter/.vscode/
+flutter/.packages
+
+# C#
+desktop/bin/
+desktop/obj/
+desktop/.vs/
+
+# Web
+web/node_modules/
+web/vendor/
+
+# Sistem
+*.log
+.DS_Store
+Thumbs.db
