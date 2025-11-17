@@ -11,7 +11,6 @@ class ProductPublicController extends Controller
     //
     public function index()
     {
-        // Ambil semua produk dan relasi gambarnya
         $products = Product::with('images', 'store')->get();
 
         return view('public.product', compact('products'));

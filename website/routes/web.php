@@ -79,16 +79,10 @@ Route::get('/products', [ProductPublicController::class, 'index'])->name('public
 //     ->middleware(['auth', 'role:member'])
 //     ->name('store.pending');
 Route::middleware(['auth', 'role:member'])->prefix('member')->group(function () {
-
-    // DASHBOARD
     Route::get('/', [MemberController::class, 'index'])->name('member.dashboard');
-
-    // AJUKAN TOKO
     Route::get('/store/create', [MemberStoreController::class, 'create'])->name('store.create');
     Route::post('/store/store', [MemberStoreController::class, 'store'])->name('store.store');
     Route::get('/store/pending', [MemberStoreController::class, 'pending'])->name('store.pending');
-
-    // PRODUK MEMBER (sesuai permintaanmu)
     Route::get('/products', [MemberProductController::class, 'index'])
         ->name('member.products.index');
 
@@ -112,7 +106,6 @@ Route::middleware(['auth', 'role:member'])->prefix('member')->group(function () 
 // Route::put('/stores/{store}/deactivate', [StoreController::class, 'deactivate'])->name('stores.deactivate');
 Route::get('/store/{store}/edit', [MemberStoreController::class, 'edit'])->name('store.edit');
 Route::put('/store/{store}', [MemberStoreController::class, 'update'])->name('store.update');
-// TRANSAKSI (public)
 Route::get('/buy/{product}', [TransactionController::class, 'create'])->name('transaction.form');
 Route::post('/buy/{product}', [TransactionController::class, 'store'])->name('transaction.store');
 
@@ -127,3 +120,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/member/transactions/{transaction}/reject', [TransactionController::class, 'reject'])
         ->name('transactions.reject');
 });
+
+Route::get('/admin/transactions/{id}/print', [TransactionController::class, 'print'])
+    ->name('admin.transactions.print');

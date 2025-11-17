@@ -34,7 +34,7 @@
                                     {{ ucfirst($t->status) }}
                                 </span>
                             </td>
-                            <td class="py-3 px-4 text-center">
+                            {{-- <td class="py-3 px-4 text-center">
                                 <form action="{{ route('admin.transactions.updateStatus', $t->id) }}" method="POST">
                                     @csrf
                                     @method('PUT')
@@ -50,6 +50,31 @@
                                         </option>
                                     </select>
                                 </form>
+                            </td> --}}
+                            <td class="py-3 px-4 text-center">
+                                <form action="{{ route('admin.transactions.updateStatus', $t->id) }}" method="POST"
+                                    class="inline-block">
+                                    @csrf
+                                    @method('PUT')
+                                    <select name="status"
+                                        class="rounded-lg border-gray-300 px-3 py-1.5 text-sm text-gray-900
+                   focus:border-blue-500 focus:ring-2 focus:ring-blue-400 transition"
+                                        onchange="this.form.submit()">
+                                        <option value="pending" {{ $t->status == 'pending' ? 'selected' : '' }}>Pending
+                                        </option>
+                                        <option value="confirmed" {{ $t->status == 'confirmed' ? 'selected' : '' }}>
+                                            Confirmed</option>
+                                        <option value="cancelled" {{ $t->status == 'cancelled' ? 'selected' : '' }}>Cancelled
+                                        </option>
+                                    </select>
+                                </form>
+                                @if ($t->status == 'confirmed')
+                                    <a href="{{ route('admin.transactions.print', $t->id) }}"
+                                        class="mt-2 inline-block bg-indigo-600 text-white text-xs font-semibold px-3 py-2 rounded-lg
+                   hover:bg-indigo-700 transition">
+                                        Cetak Struk
+                                    </a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
